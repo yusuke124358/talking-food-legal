@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>認証コールバック</title>
+<style>body{max-width:600px;margin:80px auto;padding:20px;font-family:sans-serif;text-align:center}#code{font-size:24px;font-weight:bold;color:#333;background:#f0f0f0;padding:20px;border-radius:8px;word-break:break-all;margin:20px 0}button{padding:10px 30px;font-size:16px;cursor:pointer;background:#333;color:#fff;border:none;border-radius:4px}</style>
+</head>
+<body>
+<h1>認証成功!</h1>
+<p>以下のコードをコピーしてターミナルに貼り付けてください：</p>
+<div id="code">読み込み中...</div>
+<button onclick="navigator.clipboard.writeText(document.getElementById('code').textContent).then(()=>this.textContent='コピーしました!')">コピー</button>
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const el = document.getElementById('code');
+if (code) {
+  el.textContent = code;
+} else {
+  const error = params.get('error') || 'コードが見つかりません';
+  el.textContent = 'エラー: ' + error;
+  el.style.color = 'red';
+}
+</script>
+</body>
+</html>
